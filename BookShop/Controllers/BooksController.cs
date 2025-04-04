@@ -2,6 +2,7 @@
 using BookShop.Models;
 using BookShop.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookShop.Controllers
 {
@@ -31,6 +32,11 @@ namespace BookShop.Controllers
             await dbContext.Books.AddAsync(book);
             await dbContext.SaveChangesAsync();
             return View();
+        }
+
+        public async Task<IActionResult> List()
+        {
+            var books= await dbContext.Books.ToListAsync();
         }
     }
 }
